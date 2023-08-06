@@ -40,6 +40,11 @@ export default function Home() {
       setTodos(data);
     };
 
+    const deleteToDo = async (id: number) => {
+        await axios.delete(`http://localhost:5082/api/todo/${id}`);
+        fetchTodos();
+    };
+
     const toggleComplete = async (id: number, isComplete: boolean) => {
         const updatedItem = todos.find((todo) => todo.id === id);
         if (!updatedItem) return;
@@ -60,18 +65,21 @@ export default function Home() {
             <input type="text" placeholder="Title" value={title} onChange={e => setTitle(e.target.value)} />
             <input type="text" placeholder="Url" value={url} onChange={e => setUrl(e.target.value)} />
             <input type="date" value={dueDate} onChange={e => setDueDate(e.target.value)} /> {/* 追加 */}
-            <button type="submit">Create</button>
+            <button type="submit" className={styles.addButton}>Create</button>
         </form>
         <ul className={styles.todoListBox}>
           {todos.map((todo) => (
             <li key={todo.id}>
-              <input
+              <div className={styles.todoLeftBox}>
+                <input
                   type="checkbox"
                   checked={todo.isComplete}
                   onChange={(e) => toggleComplete(todo.id, e.target.checked)}
-              />
-              <p className={styles.dueDate}>{new Date(todo.dueDate).toLocaleDateString()}</p>
-              <p><a href={todo.url} target="_blank" rel="noopener noreferrer">{todo.title}</a></p>
+                />
+                <p className={styles.dueDate}>{new Date(todo.dueDate).toLocaleDateString()}</p>
+                <p><a href={todo.url} target="_blank" rel="noopener noreferrer">{todo.title}</a></p>
+              </div>
+              <button className={styles.deleteButton} onClick={() => deleteToDo(todo.id)}>Delete</button>
             </li>
           ))}
         </ul>

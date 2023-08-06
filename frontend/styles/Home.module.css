@@ -1,30 +1,35 @@
 .main {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
+  justify-content: flex-start;
+  padding: 2rem 6rem;
   min-height: 100vh;
 }
 
 .form {
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .todoListBox {
   list-style: none;
 }
 
+.todoLeftBox {
+  display: flex;
+  align-items: center;
+}
+
 .todoListBox li {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: #fff;
   margin-bottom: 20px;
   padding: 5px 20px;
 }
 
 .todoListBox li p {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .dueDate {
@@ -33,4 +38,29 @@
   padding: 5px;
   font-size: 12px;
   margin-right: 5px;
+}
+
+.addButton {
+  border: none;
+  background: #3b5cf7;
+  border: solid 1px #3b5cf7;
+  color: #fff;
+  cursor: pointer;
+}
+
+.addButton:hover {
+  border: solid 1px #3b5cf7;
+  background: #fff;
+  color: #3b5cf7;
+}
+
+.deleteButton {
+  padding: 5px;
+  background: #fff;
+  color: red;
+  border: solid 1px red;
+}
+
+.deleteButton:hover {
+  border: solid 1px #fff;
 }
