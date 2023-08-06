@@ -54,7 +54,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateToDoItem(long id, ToDoItem item)
+        public async IActionResult UpdateToDoItem(long id, ToDoItem item)
         {
             if (id != item.Id)
             {
@@ -62,16 +62,29 @@ namespace backend.Controllers
             }
 
             _context.Entry(item).State = EntityState.Modified;
+
             try
             {
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException) when (!_context.ToDoItems.Any(e => e.Id == id))
+            catch (DbUpdateConcurrencyException)
             {
-                return NotFound();
+                if (!ToDoItemExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
             }
 
             return NoContent();
+        }
+
+        private bool ToDoItemExists(int id)
+        {
+            return _context.ToDoItems.Any(e => e.Id == id);
         }
 
         [HttpDelete("{id}")]

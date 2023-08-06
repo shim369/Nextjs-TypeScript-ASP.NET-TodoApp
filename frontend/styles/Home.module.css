@@ -6,3 +6,31 @@
   padding: 6rem;
   min-height: 100vh;
 }
+
+.form {
+  margin-bottom: 40px;
+}
+
+.todoListBox {
+  list-style: none;
+}
+
+.todoListBox li {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  margin-bottom: 20px;
+  padding: 5px 20px;
+}
+
+.todoListBox li p {
+  margin-right: 10px;
+}
+
+.dueDate {
+  background: #7088f9;
+  color: #fff;
+  padding: 5px;
+  font-size: 12px;
+  margin-right: 5px;
+}
