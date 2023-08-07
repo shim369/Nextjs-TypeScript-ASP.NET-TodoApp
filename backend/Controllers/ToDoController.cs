@@ -54,7 +54,7 @@ namespace backend.Controllers
         }
 
         [HttpPut("{id}")]
-        public async IActionResult UpdateToDoItem(long id, ToDoItem item)
+        public async Task<IActionResult> UpdateToDoItem(long id, ToDoItem item)
         {
             if (id != item.Id)
             {
@@ -82,7 +82,7 @@ namespace backend.Controllers
             return NoContent();
         }
 
-        private bool ToDoItemExists(int id)
+        private bool ToDoItemExists(long id)
         {
             return _context.ToDoItems.Any(e => e.Id == id);
         }
